@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from treebeard.mp_tree import MP_Node
 
 class CustomUser(models.AbstractUser):
     pass
@@ -7,13 +8,13 @@ class CustomUser(models.AbstractUser):
     def __str__(self):
         return self.username
 
-class CategoryManager(models.Manager):
-    # def initial_load
-    def get_queryset(self):
-        return super().get_queryset() #.filter(by user)
+# class CategoryManager(models.Manager):
+#     # def initial_load
+#     def get_queryset(self):
+#         return super().get_queryset() #.filter(by user)
 
-class Category(models.Model):
-    budgetor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+class Category(MP_Node):
+    budgetor = models.ForeignKey(settings.AUTH_USER_MODEL, db_index=True, on_delete=models.CASCADE)
     order = models.PositiveIntegerField()
     name = models.CharField(max_length=127)
     income_category = models.BooleanField()
@@ -21,6 +22,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = ['budgetor', 'name', 'income_category']
 
     '''
     https://github.com/codeforkjeff/orgtree/blob/master/models.py
@@ -34,7 +38,7 @@ class Category(models.Model):
     '''
 
 class Entry(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, db_index=True, on_delete=models.CASCADE)
     description = models.CharField(max_length=255, blank=True)
     amount = models.DecimalField(max_digits=11, decimal_places=2)
     date = models.DateTimeField()
@@ -48,10 +52,13 @@ class Entry(models.Model):
     class Meta:
         get_latest_by = ['-date']
 
+        # Adds db column to track ordering
+        order_with_respect_to = 'category'
+
 # Every Category itself as ancestor, null entry_descendent, 0 or more category_descendent
 # Every Subcategory has an ancestor (Category), and 0 or more descendents (Entry)
 # Every Entry has an ancestor (Category), null category_descendent and entry_descendent
-class CategoryRelations(models.Model):
+'''class CategoryRelations(models.Model):
     ancestor = models.ForeignKey('Category', related_name='ancestor_rel', null=True)
     category_descendent = models.ForeignKey('Category', related_name='category_descendent_rel', null=True)
-    entry_descendent = models.ForeignKey('Entry', related_name='entry_descendent_rel', null=True)
+    entry_descendent = models.ForeignKey('Entry', related_name='entry_descendent_rel', null=True)'''
