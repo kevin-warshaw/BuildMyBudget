@@ -11,12 +11,12 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
         model = models.Category
 
-class DetailedCategorySerializer(serializers.ModelSerializer):
-  category = CategorySerializer()
-
-  class Meta:
-        fields = "__all__"
-        model = models.Entry
+# class DetailedCategorySerializer(serializers.ModelSerializer):
+#   category = CategorySerializer()
+#
+#   class Meta:
+#         fields = "__all__"
+#         model = models.Entry
 
 class EntrySerializer(serializers.ModelSerializer):
   class Meta:
