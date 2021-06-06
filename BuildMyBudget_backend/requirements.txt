@@ -38,6 +38,7 @@ sounddevice==0.3.12
 sqlparse==0.4.1
 stevedore==1.30.1
 typing-extensions==3.7.4.3
+treebeard==4.5.1
 urllib3==1.24.1
 virtualenv==15.1.0
 virtualenv-clone==0.3.0

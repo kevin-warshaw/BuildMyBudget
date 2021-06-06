@@ -1,17 +1,13 @@
 from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from treebeard.mp_tree import MP_Node
 
-class CustomUser(models.AbstractUser):
+class CustomUser(AbstractUser):
     pass
 
     def __str__(self):
         return self.username
-
-# class CategoryManager(models.Manager):
-#     # def initial_load
-#     def get_queryset(self):
-#         return super().get_queryset() #.filter(by user)
 
 class Category(MP_Node):
     budgetor = models.ForeignKey(settings.AUTH_USER_MODEL, db_index=True, on_delete=models.CASCADE)
