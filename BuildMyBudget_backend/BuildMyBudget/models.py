@@ -14,6 +14,7 @@ class Category(MP_Node):
     order = models.PositiveIntegerField()
     name = models.CharField(max_length=127)
     income_category = models.BooleanField()
+    parent_category = models.ForeignKey('self', null=True, on_delete=models.CASCADE, related_name='child')
     # Subcategory as bool field?
 
     def __str__(self):
@@ -34,7 +35,7 @@ class Category(MP_Node):
     '''
 
 class Entry(models.Model):
-    category = models.ForeignKey(Category, db_index=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, db_index=True, on_delete=models.CASCADE, related_name='entries')
     description = models.CharField(max_length=255, blank=True)
     amount = models.DecimalField(max_digits=11, decimal_places=2)
     date = models.DateTimeField()
@@ -43,6 +44,7 @@ class Entry(models.Model):
     # use_time should be bool
 
     def __str__(self):
+        # TODO: update to return 'PK: amount'
         return self.description
 
     class Meta:
