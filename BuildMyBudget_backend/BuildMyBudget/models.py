@@ -14,7 +14,7 @@ class Category(MP_Node):
     order = models.PositiveIntegerField()
     name = models.CharField(max_length=127)
     income_category = models.BooleanField()
-    parent_category = models.ForeignKey('self', null=True, on_delete=models.CASCADE, related_name='child')
+    parent_category = models.ForeignKey('self', null=True, on_delete=models.CASCADE, related_name='subcategories')
     # Subcategory as bool field?
 
     def __str__(self):
