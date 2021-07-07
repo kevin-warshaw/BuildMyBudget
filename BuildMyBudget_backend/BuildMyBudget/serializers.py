@@ -2,23 +2,25 @@ from rest_framework import serializers
 from . import models
 
 class CustomUserSerializer(serializers.ModelSerializer):
-  class Meta:
+    class Meta:
         fields = "__all__"
         model = models.CustomUser
 
-class CategorySerializer(serializers.ModelSerializer):
-  class Meta:
-        fields = "__all__"
+class EntrySerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ['description', 'amount', 'date', 'is_estimate']
+        model = models.Entry
+
+class SubcategorySerializer(serializers.ModelSerializer):
+    entries = EntrySerializer(many=True)
+
+    class Meta:
+        fields = ['name', 'order', 'entries']
         model = models.Category
 
-# class DetailedCategorySerializer(serializers.ModelSerializer):
-#   category = CategorySerializer()
-#
-#   class Meta:
-#         fields = "__all__"
-#         model = models.Entry
+class ParentCategorySerializer(serializers.ModelSerializer):
+    subcategories = SubcategorySerializer(many=True)
 
-class EntrySerializer(serializers.ModelSerializer):
-  class Meta:
-        fields = "__all__"
-        model = models.Entry
+    class Meta:
+        fields = ['name', 'order', 'income_category', 'subcategories']
+        model = models.Category
