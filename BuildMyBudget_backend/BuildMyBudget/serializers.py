@@ -11,16 +11,16 @@ class EntrySerializer(serializers.ModelSerializer):
         fields = ['description', 'amount', 'date', 'is_estimate']
         model = models.Entry
 
-class CategorySerializer(serializers.ModelSerializer):
+class SubcategorySerializer(serializers.ModelSerializer):
     entries = EntrySerializer(many=True)
 
     class Meta:
-        fields = ['name', 'entries']
+        fields = ['name', 'order', 'entries']
         model = models.Category
 
-class DetailedCategorySerializer(serializers.ModelSerializer):
-    subcategories = CategorySerializer(many=True)
+class ParentCategorySerializer(serializers.ModelSerializer):
+    subcategories = SubcategorySerializer(many=True)
 
     class Meta:
+        fields = ['name', 'order', 'income_category', 'subcategories']
         model = models.Category
-        fields = ['name', 'subcategories']

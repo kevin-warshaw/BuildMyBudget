@@ -9,12 +9,9 @@ class CustomUserViewSet(ModelViewSet):
     permission_classes = [AllowAny]
 
 # https://stackoverflow.com/questions/59006151/django-rest-framework-return-multiple-models-nested
-class DetailedCategoryViewSet(ModelViewSet):
+class ParentCategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
-    # def get_queryset(self):
-    #     return Category.objects.
-
-    serializer_class = DetailedCategorySerializer
+    serializer_class = ParentCategorySerializer
     permission_classes = [AllowAny]
 
 # class CategoryViewSet(ModelViewSet):
