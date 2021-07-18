@@ -2,13 +2,13 @@ import {createStore, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
 
 import logger from "redux-logger";
-import reducer from "./reducers.js";
+import entryReducer, categoryReducer from "./reducers.js";
 const middlewares = [thunk,logger];
 
 
 
 export default function configureStore(initialState) {
-    const store = createStore(reducer, initialState,
+    const store = createStore({entries: entryReducer, categories: categoryReducer}, initialState,
                                        applyMiddleware(...middlewares));
     return store;
 }
