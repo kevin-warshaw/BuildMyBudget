@@ -49,4 +49,4 @@ const categoryReducer = (state = initialCategoriesState, action) => {
     }
 }
 
-export entryReducer, categoryReducer
+export { entryReducer, categoryReducer }
