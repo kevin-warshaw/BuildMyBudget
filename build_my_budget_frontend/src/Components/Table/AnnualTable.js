@@ -45,12 +45,19 @@ const AnnualTable = ({ title, estimated, categoryStore }) => {
 
     const safeCategory = () => {
         if (categoryStore.categories) {
-            return (categoryStore.categories.map((cat) => {
-                        return (
-                            <AnnualTableRow title={cat.name} cells={cat.entries} isParent={!cat.subcategory} />
-                        );
-                    }))
-                }
+            let categories = (categoryStore.categories.map((parent) => {
+                return ([
+                    <AnnualTableRow title={parent.name} cells={[]} isParent={true} />,
+                    parent.subcategories.map((child) => <AnnualTableRow title={child.name} cells={child.entries} isParent={false} />)
+                ]);
+            }))
+
+            return (
+                <div className="categories">
+                    <div>{ categories }</div>
+                </div>
+            );
+        }
     }
 
     return  (

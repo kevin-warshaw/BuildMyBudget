@@ -9,11 +9,15 @@ const AnnualTableRow = ({ title, cells, isParent }) => {
 
     const spreadCells = (cells, isParent) => {
         if (cells && !isParent) {
-            return cells.map((value) => {
-                return <TableCell value={value} isEditing={false} />
-            });
-        } else {
-            return <TableCell value="" isEditing={false}/>
+            var output = Array(12).fill(<TableCell value="-" isEditing={false}/>);
+
+            cells.map((cell) => {
+                var cellDate = new Date(cell.date);
+                output[cellDate.getMonth() + 1] = <TableCell value={cell.amount} isEditing={false} />
+            })
+            console.log("OUTPUT")
+            console.log(output)
+            return output;
         }
     }
 
