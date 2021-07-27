@@ -15,15 +15,14 @@ const AnnualTableRow = ({ title, cells, isParent }) => {
                 var cellDate = new Date(cell.date);
                 output[cellDate.getMonth() + 1] = <TableCell value={cell.amount} isEditing={false} />
             })
-            console.log("OUTPUT")
-            console.log(output)
+
             return output;
         }
     }
 
     return  (
-        <tr>
-            <td key={title}>{title}</td>
+        <tr key={title}>
+            <td>{title}</td>
             {spreadCells(cells, isParent)}
         </tr>
     );

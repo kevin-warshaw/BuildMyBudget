@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
 import { getCategories, deleteCategory} from '../../Redux/actions.js'
 import AnnualTableRow from "./AnnualTableRow";
@@ -45,34 +45,41 @@ const AnnualTable = ({ title, estimated, categoryStore }) => {
 
     const safeCategory = () => {
         if (categoryStore.categories) {
-            let categories = (categoryStore.categories.map((parent) => {
-                return ([
-                    <AnnualTableRow title={parent.name} cells={[]} isParent={true} />,
-                    parent.subcategories.map((child) => <AnnualTableRow title={child.name} cells={child.entries} isParent={false} />)
-                ]);
-            }))
-
-            return (
-                <div className="categories">
-                    <div>{ categories }</div>
-                </div>
-            );
+            return categoryStore.categories;
+        } else {
+            return [];
         }
     }
 
+    const getRows = () => {
+        var rows = []
+        safeCategory().forEach((parent) => {
+            rows.push(<AnnualTableRow title={parent.name} cells={[]} isParent={true} />);
+            (parent.subcategories ? parent.subcategories : []).forEach((child) => {
+                rows.push(<AnnualTableRow title={child.name} cells={child.entries} isParent={false} />);
+            })
+        })
+
+        return rows;
+    }
+
+
+
     return  (
-        <table className={title}>
-            <thead>
-                <tr>
-                    {months.map((name) => {
-                        return (<td key={name}> {name} </td>);
-                    })}
-                </tr>
-            </thead>
-            <tbody>
-                {safeCategory()}
-            </tbody>
-        </table>
+        <div>
+            <table className={title}>
+                <thead>
+                    <tr>
+                        {months.map((name) => {
+                            return (<th key={name}> {name} </th>);
+                        })}
+                    </tr>
+                </thead>
+                <tbody>
+                    {getRows()}
+                </tbody>
+            </table>
+        </div>
     );
 };
 
