@@ -40,20 +40,11 @@ const AnnualTable = ({ title, estimated, categoryStore }) => {
 
     const loadCells = () => {
         // Load cell info from backend
-        dispatch(getCategories());
-    }
-
-    const safeCategory = () => {
-        if (categoryStore.categories) {
-            return categoryStore.categories;
-        } else {
-            return [];
-        }
     }
 
     const getRows = () => {
-        var rows = []
-        safeCategory().forEach((parent) => {
+        var rows = [];
+        (categoryStore.categories ? categoryStore.categories : []).forEach((parent) => {
             rows.push(<AnnualTableRow title={parent.name} cells={[]} isParent={true} />);
             (parent.subcategories ? parent.subcategories : []).forEach((child) => {
                 rows.push(<AnnualTableRow title={child.name} cells={child.entries} isParent={false} />);
@@ -63,9 +54,7 @@ const AnnualTable = ({ title, estimated, categoryStore }) => {
         return rows;
     }
 
-
-
-    return  (
+    return (
         <div>
             <table className={title}>
                 <thead>
