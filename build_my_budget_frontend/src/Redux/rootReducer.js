@@ -3,6 +3,6 @@ import { entryReducer, categoryReducer } from './reducers';
 
 const rootReducer = combineReducers({
     categories: categoryReducer,
-    entryReducer: entryReducer
+    entries: entryReducer
 });
 export default rootReducer;
