@@ -1,12 +1,10 @@
 import React from "react";
 import TableCell from "./TableCell";
 
-// title: String
-// id: Int
-// isParent: Bool
+// title: String, name used for row in first cell and as key of the row
+// cells: Int, all entries to display as part of the row replacing default values
+// isParent: Bool, Indicates if row should be formatted as a category or subcategory
 const AnnualTableRow = ({ title, cells, isParent }) => {
-    //const [cells, setCells] = useState(Array.from(Array(13)).forEach(TableCell));
-
     const spreadCells = (cells, isParent) => {
         if (cells && !isParent) {
             var output = Array(12).fill(<TableCell value="-" isEditing={false}/>);
@@ -20,7 +18,7 @@ const AnnualTableRow = ({ title, cells, isParent }) => {
         }
     }
 
-    return  (
+    return (
         <tr key={title}>
             <td>{title}</td>
             {spreadCells(cells, isParent)}

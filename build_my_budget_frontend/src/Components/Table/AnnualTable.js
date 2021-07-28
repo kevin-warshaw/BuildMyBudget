@@ -44,9 +44,9 @@ const AnnualTable = ({ title, estimated, categoryStore }) => {
 
     const getRows = () => {
         var rows = [];
-        (categoryStore.categories ? categoryStore.categories : []).forEach((parent) => {
+        (categoryStore.categories ? categoryStore.categories : []).map((parent) => {
             rows.push(<AnnualTableRow title={parent.name} cells={[]} isParent={true} />);
-            (parent.subcategories ? parent.subcategories : []).forEach((child) => {
+            (parent.subcategories ? parent.subcategories : []).map((child) => {
                 rows.push(<AnnualTableRow title={child.name} cells={child.entries} isParent={false} />);
             })
         })
