@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
 import { getCategories, deleteCategory} from '../../Redux/actions.js'
 import AnnualTableRow from "./AnnualTableRow";
@@ -72,36 +72,12 @@ const AnnualTable = ({ title, estimated, categoryStore }) => {
     );
 };
 
-/* https://react-redux.js.org/api/hooks
-const mapDispatchToProps = {
-    getCategories, deleteCategory, createCategory
-}
-
-
-categories.map((cat) => {
-    return (
-        <AnnualTableRow title={"test"} cells={cat.entries} isParent={false} />
-    );
-})
-*/
-
-/*
-Example of accessing state
-import React from 'react'
-import { useSelector } from 'react-redux'
-
-export const CounterComponent = () => {
-  const counter = useSelector((state) => state.counter)
-  return <div>{counter}</div>
-}
-*/
-
+// https://react-redux.js.org/api/hooks
 function mapStateToProps(state) {
     return {
-        entries: state.entries,
+        entryStore: state.entries,
         categoryStore: state.categories
     }
 };
-
 
 export default connect(mapStateToProps)(AnnualTable)
