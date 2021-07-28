@@ -1,9 +1,9 @@
 import React from "react";
 import TableCell from "./TableCell";
 
-// title: String, name used for row in first cell and as key of the row
+// title: String, name used for row in first cell which doubles as the key of the row
 // cells: Int, all entries to display as part of the row replacing default values
-// isParent: Bool, Indicates if row should be formatted as a category or subcategory
+// isParent: Bool, indicates if row should be formatted as a category or subcategory
 const AnnualTableRow = ({ title, cells, isParent }) => {
     const spreadCells = (cells, isParent) => {
         if (cells && !isParent) {
@@ -25,11 +25,5 @@ const AnnualTableRow = ({ title, cells, isParent }) => {
         </tr>
     );
 };
-
-/*
-See right above useDispatch here for how to use selector for multiple instances
-
-*/
-
 
 export default AnnualTableRow
