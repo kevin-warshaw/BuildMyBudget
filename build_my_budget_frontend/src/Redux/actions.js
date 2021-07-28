@@ -87,7 +87,7 @@ export const createEntry = (data,cb) => {
     }
 }
 
-export const createCategory = (data) => {
+export const createCategory = (data, cb) => {
     return dispatch => {
         axios.get(`${process.env.REACT_APP_HOST_IP_ADDRESS}/api/categories/`, data)
             .then(response => {

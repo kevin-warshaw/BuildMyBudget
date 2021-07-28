@@ -30,7 +30,7 @@ const initialCategoriesState = {
 }
 
 const categoryReducer = (state = initialCategoriesState, action) => {
-    switch(actin.type) {
+    switch(action.type) {
         case Types.CATEGORIES_LOADING: {
             console.log("create_category")
             return {...state, loading: action.payload}
@@ -49,4 +49,4 @@ const categoryReducer = (state = initialCategoriesState, action) => {
     }
 }
 
-export entryReducer, categoryReducer
+export { entryReducer, categoryReducer }
