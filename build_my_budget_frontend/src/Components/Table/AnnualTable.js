@@ -5,9 +5,10 @@ import AnnualTableRow from "./AnnualTableRow";
 // TODO: Add propTypes
 
 // title: String, used to define table's default name shown to user
-// esimated: Bool, indicated if estimated or actual data being used
+// income: Bool, indicates if table is being used to display user income information or expenses
+// esimated: Bool, indicates if estimated or actual data being used
 // categories: Array<Category>, array of categories returned from the backend to show the user
-const AnnualTable = ({ title, estimated, categoryStore }) => {
+const AnnualTable = ({ title, income, estimated, categoryStore }) => {
     const dispatch = useDispatch();
     const months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September",
                     "October", "November", "December"];
@@ -45,10 +46,12 @@ const AnnualTable = ({ title, estimated, categoryStore }) => {
     const getRows = () => {
         var rows = [];
         (categoryStore.categories ? categoryStore.categories : []).map((parent) => {
-            rows.push(<AnnualTableRow title={parent.name} cells={[]} isParent={true} />);
-            (parent.subcategories ? parent.subcategories : []).map((child) => {
-                rows.push(<AnnualTableRow title={child.name} cells={child.entries} isParent={false} />);
-            })
+            if (parent.income_category == income) {
+                rows.push(<AnnualTableRow title={parent.name} cells={[]} isParent={true} />);
+                (parent.subcategories ? parent.subcategories : []).map((child) => {
+                    rows.push(<AnnualTableRow title={child.name} cells={child.entries} isParent={false} />);
+                })
+            }
         })
 
         return rows;
