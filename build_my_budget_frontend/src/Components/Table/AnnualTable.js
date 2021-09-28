@@ -46,6 +46,7 @@ const AnnualTable = ({ title, income, estimated, categoryStore }) => {
     const getRows = () => {
         var rows = [];
         (categoryStore.categories ? categoryStore.categories : []).map((parent) => {
+            // Check if the parent category matches the expected table
             if (parent.income_category == income) {
                 rows.push(<AnnualTableRow title={parent.name} cells={[]} isParent={true} />);
                 (parent.subcategories ? parent.subcategories : []).map((child) => {
