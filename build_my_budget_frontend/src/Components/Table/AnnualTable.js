@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
 import { getCategories, deleteCategory} from '../../Redux/actions.js'
 import AnnualTableRow from "./AnnualTableRow";
+import "../../Assets/css/main.css";
 // TODO: Add propTypes
 
 // title: String, used to define table's default name shown to user
@@ -60,7 +61,7 @@ const AnnualTable = ({ title, income, estimated, categoryStore }) => {
 
     return (
         <div>
-            <table className={title}>
+            <table className="table100 ver3">
                 <thead>
                     <tr>
                         {months.map((name) => {
