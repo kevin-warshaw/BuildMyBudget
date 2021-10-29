@@ -318,6 +318,10 @@ th, td {
     width: 100%;
 }
 
+.table100.ver3 .row100.parent-row td:first-child {
+    border-right: hidden;
+}
+
 /*==================================================================
 [ Ver4 ]*/
 
