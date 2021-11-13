@@ -19,8 +19,8 @@ const AnnualTableRow = ({ title, cells, isParent }) => {
     }
 
     return (
-        <tr key={title}>
-            <td>{title}</td>
+        <tr className={ isParent ? `row100 parent-row` : `row100` } key={title}>
+            <td colspan={ isParent ? "13" : "1" }>{title}</td>
             {spreadCells(cells, isParent)}
         </tr>
     );

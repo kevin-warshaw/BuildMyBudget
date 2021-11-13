@@ -17,7 +17,7 @@ const entryReducer = (state = initialEntriesState, action) => {
         }
 
         case Types.DELETE_ENTRY: {
-            return {...state, entries: state.entries.filter(entry => entry.id != action.payload)}
+            return {...state, entries: state.entries.filter(entry => entry.id !== action.payload)}
         }
         default:
             return state;
@@ -42,7 +42,7 @@ const categoryReducer = (state = initialCategoriesState, action) => {
 
         case Types.DELETE_CATEGORY: {
             // TODO: Handle deletion of parent category
-            return {...state, categories: state.categories.filter(category => category.id != action.payload)}
+            return {...state, categories: state.categories.filter(category => category.id !== action.payload)}
         }
         default:
             return state;
